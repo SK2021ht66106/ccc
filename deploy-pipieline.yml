@@ -9,10 +9,10 @@ pool:
   name: Default
 
 variables:
-- template: variables.yaml
+- template: variables.yml
 
 stages: 
-- stage: Deploy Client
+- stage: DeployClient
   jobs:
   - deployment: 
     timeoutInMinutes: 360 
@@ -22,8 +22,7 @@ stages:
       runOnce: 
         deploy: 
           steps: 
-          - checkout: self 
-          - checkout: pipeline-templates
+          - checkout: self
           - task: qetza.replacetokens.replacetokens-task.replacetokens@3 
             displayName: 'Replace tokens in deployment.yml' 
             inputs: 
