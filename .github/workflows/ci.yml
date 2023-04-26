@@ -15,7 +15,6 @@ on:
 # concurrency: ${{ github.workflow || github.run_id }}
 jobs:
   release:
-    needs: build
     runs-on: ubuntu-latest
     env:
       CI: 'true'
