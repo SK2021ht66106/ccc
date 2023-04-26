@@ -12,6 +12,30 @@ variables:
 - template: variables.yml
 
 stages: 
+- stage: DeployApi
+  jobs:
+  - deployment: 
+    timeoutInMinutes: 360 
+    displayName: Deploy to $(environment)
+    environment: '$(environment).$(namespace)' 
+    strategy: 
+      runOnce: 
+        deploy: 
+          steps: 
+          - checkout: self
+          - task: qetza.replacetokens.replacetokens-task.replacetokens@3 
+            displayName: 'Replace tokens in deployment-api.yml' 
+            inputs: 
+              rootDirectory: "$(System.DefaultWorkingDirectory)/kubernetes" 
+              targetFiles: deployment-api.yml 
+          - script: cat $(System.DefaultWorkingDirectory)/kubernetes/deployment-api.yml 
+            displayName: Print manifest file 
+          - task: KubernetesManifest@0 
+            displayName: deploy 
+            inputs: 
+              namespace: $(namespace)
+              manifests: '$(System.DefaultWorkingDirectory)/kubernetes/deployment-api.yml'
+
 - stage: DeployClient
   jobs:
   - deployment: 
@@ -24,14 +48,14 @@ stages:
           steps: 
           - checkout: self
           - task: qetza.replacetokens.replacetokens-task.replacetokens@3 
-            displayName: 'Replace tokens in deployment.yml' 
+            displayName: 'Replace tokens in deployment-client.yml' 
             inputs: 
               rootDirectory: "$(System.DefaultWorkingDirectory)/kubernetes" 
-              targetFiles: deployment.yml 
-          - script: cat $(System.DefaultWorkingDirectory)/kubernetes/deployment.yml 
+              targetFiles: deployment-client.yml 
+          - script: cat $(System.DefaultWorkingDirectory)/kubernetes/deployment-client.yml 
             displayName: Print manifest file 
           - task: KubernetesManifest@0 
             displayName: deploy 
             inputs: 
               namespace: $(namespace)
-              manifests: '$(System.DefaultWorkingDirectory)/kubernetes/deployment.yml'
+              manifests: '$(System.DefaultWorkingDirectory)/kubernetes/deployment-client.yml'

@@ -1,32 +1,32 @@
 apiVersion: apps/v1 
 kind: Deployment 
 metadata: 
-  name: #{APP_NAME}# 
+  name: api
 spec: 
   replicas: #{NUM_POD_REPLICAS}# 
   selector: 
     matchLabels: 
-      app: #{APP_NAME}# 
+      app: api
   template: 
     metadata: 
       labels: 
-        app: #{APP_NAME}# 
+        app: api
     spec:
       containers: 
-      - name: #{APP_NAME}# 
-        image: #{AZURE_ACR_NAME}#.azurecr.io/cloudcarboncalculator/client
+      - name: api
+        image: #{AZURE_ACR_NAME}#.azurecr.io/cloudcarboncalculator/api
         ports: 
         - containerPort: #{CONTAINER_PORT}# 
 --- 
 apiVersion: v1 
 kind: Service 
 metadata: 
-  name: #{APP_NAME}# 
+  name: api
 spec: 
   type: ClusterIP 
   ports: 
   - protocol: TCP 
-    port: #{PORT}# 
-    targetPort: #{TARGET_PORT}# 
+    port: 4000
+    targetPort: 4000
   selector: 
-    app: #{APP_NAME}# 
+    app: api
