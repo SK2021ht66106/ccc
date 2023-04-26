@@ -11,9 +11,7 @@ spec:
     metadata: 
       labels: 
         app: #{APP_NAME}# 
-    spec: 
-      nodeSelector: 
-        podname: risk 
+    spec:
       containers: 
       - name: #{APP_NAME}# 
         image: #{AZURE_ACR_NAME}#.azurecr.io/cloudcarboncalculator/client:latest
