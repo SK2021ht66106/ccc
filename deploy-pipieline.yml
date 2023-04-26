@@ -9,7 +9,7 @@ pool:
   name: Default
 
 variables:
-- template: variables.yaml
+- template: variables.yml
 
 stages: 
 - stage: Deploy Client
