@@ -61,15 +61,15 @@ __metadata:
   linkType: hard
 
 "@azure/arm-resources-subscriptions@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "@azure/arm-resources-subscriptions@npm:2.0.1"
+  version: 2.0.2
+  resolution: "@azure/arm-resources-subscriptions@npm:2.0.2"
   dependencies:
     "@azure/core-auth": ^1.3.0
-    "@azure/core-client": ^1.5.0
+    "@azure/core-client": ^1.6.1
     "@azure/core-paging": ^1.2.0
     "@azure/core-rest-pipeline": ^1.8.0
     tslib: ^2.2.0
-  checksum: b39332c922ca7638df0e6a865ba50950a43c130185c8078d9d3434dbfa44ca7c8068d8570eb20d86db73674b68c8f108c3b0cf5aeb79859cfb348fdf1cf577b1
+  checksum: b9971dbfbae8b418a3a1f0200a8e503ac9a9651cf60a28eef83673a67529ef3af0653a3bee6da6e3a7548aa9e8e48a1818f79460dc5e9044914227093a108fd9
   languageName: node
   linkType: hard
 
