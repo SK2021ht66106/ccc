@@ -1,0 +1,43 @@
+apiVersion: apps/v1 
+kind: Deployment 
+metadata: 
+  name: #{APP_NAME}# 
+spec: 
+  replicas: #{NUM_POD_REPLICAS}# 
+  selector: 
+    matchLabels: 
+      app: #{APP_NAME}# 
+  template: 
+    metadata: 
+      labels: 
+        app: #{APP_NAME}# 
+    spec: 
+      nodeSelector: 
+        podname: risk 
+      containers: 
+      - name: #{APP_NAME}# 
+        image: #{AZURE_ACR_NAME}#.azurecr.io/#{POD_NAME}#/#{APP_TYPE}#/#{APP_NAME}#:#{Build.BuildId}# 
+        env: 
+        - name: REACT_APP_CLIENT_ID 
+          value: #{REACT_APP_CLIENT_ID}# 
+        - name: REACT_APP_RESOURCE 
+          value: #{REACT_APP_RESOURCE}# 
+        - name: REACT_APP_BASE_URL 
+          value: #{REACT_APP_BASE_URL}# 
+        - name: REACT_APP_QA_TOKEN 
+          value: #{REACT_APP_QA_TOKEN}# 
+        ports: 
+        - containerPort: #{CONTAINER_PORT}# 
+--- 
+apiVersion: v1 
+kind: Service 
+metadata: 
+  name: #{APP_NAME}# 
+spec: 
+  type: ClusterIP 
+  ports: 
+  - protocol: TCP 
+    port: #{PORT}# 
+    targetPort: #{TARGET_PORT}# 
+  selector: 
+    app: #{APP_NAME}# 

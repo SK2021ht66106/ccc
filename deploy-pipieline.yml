@@ -1,0 +1,39 @@
+trigger: 
+    branches: 
+        include: 
+            - main
+
+pr: none # will disable PR builds 
+
+pool: 
+  name: Default
+
+variables:
+- template: variables.yaml
+
+stages: 
+- stage: Deploy Client
+  jobs: 
+  - checkout: self
+  - deployment: 
+    timeoutInMinutes: 360 
+    displayName: Deploy to $(environment)
+    environment: '$(environment).$(namespace)' 
+    strategy: 
+      runOnce: 
+        deploy: 
+          steps: 
+          - checkout: self 
+          - checkout: pipeline-templates
+          - task: qetza.replacetokens.replacetokens-task.replacetokens@3 
+            displayName: 'Replace tokens in deployment.yml' 
+            inputs: 
+              rootDirectory: "$(System.DefaultWorkingDirectory)/kubernetes" 
+              targetFiles: deployment.yml 
+          - script: cat $(System.DefaultWorkingDirectory)/kubernetes/deployment.yml 
+            displayName: Print manifest file 
+          - task: KubernetesManifest@0 
+            displayName: deploy 
+            inputs: 
+              namespace: $(namespace)' 
+              manifests: '$(System.DefaultWorkingDirectory)/kubernetes/deployment.yml'
