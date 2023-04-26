@@ -33,5 +33,5 @@ stages:
           - task: KubernetesManifest@0 
             displayName: deploy 
             inputs: 
-              namespace: $(namespace)' 
+              namespace: $(namespace)
               manifests: '$(System.DefaultWorkingDirectory)/kubernetes/deployment.yml'
