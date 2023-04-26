@@ -1,14 +1,16 @@
 variables: 
     namespace: calculator
     environment: test
+    POD_NAME: 'carboncloud' 
+    APP_TYPE: 'node' 
     APP_NAME: 'client'
     NUM_POD_REPLICAS: '1'
     AZURE_ACR_NAME: 'cloudcarbon'
-    REACT_APP_TENANT_ID: 79398827-dad5-4378-ac02-4d0f46965838
-    REACT_APP_CLIENT_ID: 30481a8b-2c02-486d-b773-b1ad4f8f4bbe 
-    REACT_APP_CLIENT_SECRET: IEn8Q~f66g3xB1oXaiGM3rgPIMKWG2HPdGLX6cYM 
-    REACT_APP_RESOURCE: 30481a8b-2c02-486d-b773-b1ad4f8f4bbe 
-    REACT_APP_BASE_URL: 'https://calculator.karumanchi.store'
+    # REACT_APP_TENANT_ID: 79398827-dad5-4378-ac02-4d0f46965838
+    # REACT_APP_CLIENT_ID: 30481a8b-2c02-486d-b773-b1ad4f8f4bbe 
+    # REACT_APP_CLIENT_SECRET: IEn8Q~f66g3xB1oXaiGM3rgPIMKWG2HPdGLX6cYM 
+    # REACT_APP_RESOURCE: 30481a8b-2c02-486d-b773-b1ad4f8f4bbe 
+    # REACT_APP_BASE_URL: 'https://calculator.karumanchi.store'
     CONTAINER_PORT: 3000 
     PORT: 80 
     TARGET_PORT: 3000
