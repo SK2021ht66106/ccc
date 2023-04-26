@@ -13,8 +13,7 @@ variables:
 
 stages: 
 - stage: Deploy Client
-  jobs: 
-  - checkout: self
+  jobs:
   - deployment: 
     timeoutInMinutes: 360 
     displayName: Deploy to $(environment)
