@@ -12,7 +12,7 @@ variables:
 - template: variables.yml
 
 stages: 
-- stage: Deploy Client
+- stage: DeployClient
   jobs:
   - deployment: 
     timeoutInMinutes: 360 
