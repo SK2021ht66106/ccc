@@ -16,16 +16,7 @@ spec:
         podname: risk 
       containers: 
       - name: #{APP_NAME}# 
-        image: #{AZURE_ACR_NAME}#.azurecr.io/#{POD_NAME}#/#{APP_TYPE}#/#{APP_NAME}#:#{Build.BuildId}# 
-        env: 
-        - name: REACT_APP_CLIENT_ID 
-          value: #{REACT_APP_CLIENT_ID}# 
-        - name: REACT_APP_RESOURCE 
-          value: #{REACT_APP_RESOURCE}# 
-        - name: REACT_APP_BASE_URL 
-          value: #{REACT_APP_BASE_URL}# 
-        - name: REACT_APP_QA_TOKEN 
-          value: #{REACT_APP_QA_TOKEN}# 
+        image: #{AZURE_ACR_NAME}#.azurecr.io/cloudcarboncalculator/client:latest
         ports: 
         - containerPort: #{CONTAINER_PORT}# 
 --- 
