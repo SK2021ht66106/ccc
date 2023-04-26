@@ -80,11 +80,11 @@ jobs:
       #   env:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # Convert the newly created tag into a release with changelog information
-      - name: Create release on GitHub
-        if: github.event.pull_request.head.ref == 'changeset-release/trunk'
-        run: node scripts/create-github-release.js ${{ steps.create_tag.outputs.tag_name }} 1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Create release on GitHub
+      #   if: github.event.pull_request.head.ref == 'changeset-release/trunk'
+      #   run: node scripts/create-github-release.js ${{ steps.create_tag.outputs.tag_name }} 1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
       - uses: azure/docker-login@v1
         with:
