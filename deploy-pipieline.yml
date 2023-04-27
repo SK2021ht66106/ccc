@@ -38,7 +38,7 @@ stages:
               scriptLocation: 'inlineScript'
               inlineScript: |
                 imagetag="$(az acr repository show-tags --name cloudcarbon --repository cloudcarboncalculator/api --top 1 --orderby time_desc)"
-                echo "##vso[task.setvariable variable=imagetag;]$imagetag"
+                echo "##vso[task.setvariable variable=IMAGE_TAG;]$imagetag"
               
           - task: qetza.replacetokens.replacetokens-task.replacetokens@3 
             displayName: 'Replace tokens in deployment-api.yml' 
@@ -48,7 +48,7 @@ stages:
           - script: cat $(System.DefaultWorkingDirectory)/kubernetes/deployment-api.yml 
             displayName: Print manifest file 
           
-          - bash: echo $imagetag
+          - bash: $imagetag
           - task: KubernetesManifest@0 
             displayName: deploy 
             inputs: 
