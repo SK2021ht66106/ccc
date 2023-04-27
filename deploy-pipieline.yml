@@ -6,7 +6,7 @@ trigger:
 pr: none # will disable PR builds 
 
 pool: 
-  name: Default
+  name: "Azure Pipelines"
 
 variables:
 - template: variables.yml
