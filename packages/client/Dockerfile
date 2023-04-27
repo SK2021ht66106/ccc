@@ -5,6 +5,8 @@ COPY ./build /app/build
 
 RUN yarn install --immutable
 
-FROM nginx:stable-alpine
-COPY --from=build /app/build /var/www
-CMD ["nginx", "-g", "daemon off;"]
+CMD [ "yarn", "start:webprod"]
+
+# FROM nginx:stable-alpine
+# COPY --from=build /app/build /var/www
+# CMD ["nginx", "-g", "daemon off;"]
