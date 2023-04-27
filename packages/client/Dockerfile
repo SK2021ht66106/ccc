@@ -29,10 +29,10 @@ WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 # install app dependencies
 COPY package.json ./
-COPY yarn.lock ./
+#COPY yarn.lock ./
 # rebuild node-sass
 RUN yarn add node-sass
-RUN yarn
+RUN yarn install --immutable
 # add app
 COPY . ./
 # start app
