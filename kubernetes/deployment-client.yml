@@ -16,6 +16,17 @@ spec:
       - name: client
         image: #{AZURE_ACR_NAME}#.azurecr.io/cloudcarboncalculator/client:b2a1d9c879c50f2e4f1a4364103929ecdde61277
         - containerPort: 80
+         volumeMounts:
+        - name: nginx-config
+          mountPath: /docker/nginx.conf
+          subPath: nginx.conf
+        - name: other.conf
+          mountPath: /etc/nginx/nginx.conf
+          subPath: nginx.conf
+      volumes:
+        - name: nginx-config
+          configMap:
+            name: nginx-config
 --- 
 apiVersion: v1
 kind: Service
