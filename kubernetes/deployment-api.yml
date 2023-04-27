@@ -14,7 +14,7 @@ spec:
     spec:
       containers: 
       - name: api
-        image: #{AZURE_ACR_NAME}#.azurecr.io/cloudcarboncalculator/api:#{IMAGE_TAG}#
+        image: #{AZURE_ACR_NAME}#.azurecr.io/cloudcarboncalculator/api:e0277ab90221e60e14609d14e9c891c6b38ec4ba
         ports: 
         - containerPort: 4000
 --- 
