@@ -1,16 +1,13 @@
-# FROM node:16-alpine as build
-# WORKDIR /app
-# COPY ./package.json ./package.json
-# COPY ./build /app/build
+FROM node:16-alpine as build
+WORKDIR /app
+COPY ./package.json ./package.json
+COPY ./build /app/build
 
-# RUN yarn install --immutable
+RUN yarn install --immutable
 
-# CMD ["yarn", "start"]
-
-
-# FROM nginx:stable-alpine
-# COPY --from=build /app/build /var/www
-# CMD ["nginx", "-g", "daemon off;"]
+FROM nginx:stable-alpine
+COPY --from=build /app/build /var/www
+CMD ["nginx", "-g", "daemon off;"]
 
 # FROM node:16-alpine
 # WORKDIR /app
@@ -22,18 +19,18 @@
 # CMD serve
 
 
-FROM node:16-alpine
-# set the working direction
-WORKDIR /app
-# add `/app/node_modules/.bin` to $PATH
-ENV PATH /app/node_modules/.bin:$PATH
-# install app dependencies
-COPY package.json ./
-#COPY yarn.lock ./
-# rebuild node-sass
-RUN yarn add node-sass
-RUN yarn install --immutable
-# add app
-COPY . ./
-# start app
-CMD ["yarn", "start"]
+# FROM node:16-alpine
+# # set the working direction
+# WORKDIR /app
+# # add `/app/node_modules/.bin` to $PATH
+# ENV PATH /app/node_modules/.bin:$PATH
+# # install app dependencies
+# COPY package.json ./
+# #COPY yarn.lock ./
+# # rebuild node-sass
+# RUN yarn add node-sass
+# RUN yarn install --immutable
+# # add app
+# COPY . ./
+# # start app
+# CMD ["yarn", "start"]
