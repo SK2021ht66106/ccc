@@ -10,6 +10,8 @@ pool:
 
 variables:
 - template: variables.yml
+- name: imagetag
+  value: test
 
 stages: 
 - stage: DeployApi
@@ -23,6 +25,14 @@ stages:
         deploy: 
           steps: 
           - checkout: self
+          - task: AzureCLI@2
+            inputs:
+              azureSubscription: 'freetrail_sc'
+              scriptType: 'pscore'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                 $imagetag=az acr repository show-tags --name cloudcarbon --repository cloudcarboncalculator/api --top 1 --orderby time_desc
+                 Write-Host "##vso[task.setvariable variable=imagetag;]$imagetag"
           - task: qetza.replacetokens.replacetokens-task.replacetokens@3 
             displayName: 'Replace tokens in deployment-api.yml' 
             inputs: 
@@ -30,6 +40,8 @@ stages:
               targetFiles: deployment-api.yml 
           - script: cat $(System.DefaultWorkingDirectory)/kubernetes/deployment-api.yml 
             displayName: Print manifest file 
+          
+          - powershell: echo $imagetag
           - task: KubernetesManifest@0 
             displayName: deploy 
             inputs: 
