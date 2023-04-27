@@ -26,7 +26,7 @@ stages:
           - task: AzureCLI@2
             inputs:
               azureSubscription: 'freetrail_sc'
-              scriptType: 'ps'
+              scriptType: 'core'
               scriptLocation: 'inlineScript'
               inlineScript: |
                 $imagetag=az acr repository show-tags --name cloudcarbon --repository cloudcarboncalculator/api --top 1 --orderby time_desc
