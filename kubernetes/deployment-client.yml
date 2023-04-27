@@ -14,7 +14,7 @@ spec:
     spec:
       containers: 
       - name: client
-        image: #{AZURE_ACR_NAME}#.azurecr.io/cloudcarboncalculator/client:422218d8113e9aae6b4571f73f4f5651e63f842d
+        image: #{AZURE_ACR_NAME}#.azurecr.io/cloudcarboncalculator/client:8327ff7ea05241d79a357388f5c339808bc3fed8
         ports: 
         - containerPort: 80
 --- 
