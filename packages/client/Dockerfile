@@ -1,10 +1,19 @@
-FROM node:16-alpine as build
+# FROM node:16-alpine as build
+# WORKDIR /app
+# COPY ./package.json ./package.json
+# COPY ./build /app/build
+
+# RUN yarn install --immutable
+
+# FROM nginx:stable-alpine
+# COPY --from=build /app/build /var/www
+# CMD ["nginx", "-g", "daemon off;"]
+
+FROM node:16-alpine
 WORKDIR /app
-COPY ./package.json ./package.json
+# COPY ./package.json ./package.json
+# COPY ./build /app/build
+COPY serve.json ./
+RUN yarn install serve --immutable
 COPY ./build /app/build
-
-RUN yarn install --immutable
-
-FROM nginx:stable-alpine
-COPY --from=build /app/build /var/www
-CMD ["nginx", "-g", "daemon off;"]
+CMD serve
