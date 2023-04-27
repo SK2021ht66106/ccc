@@ -25,14 +25,16 @@ stages:
         deploy: 
           steps: 
           - checkout: self
+
           - task: AzureCLI@2
             inputs:
               azureSubscription: 'freetrail_sc'
-              scriptType: 'pscore'
+              scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: |
-                 $imagetag=az acr repository show-tags --name cloudcarbon --repository cloudcarboncalculator/api --top 1 --orderby time_desc
-                 Write-Host "##vso[task.setvariable variable=imagetag;]$imagetag"
+                imagetag=az acr repository show-tags --name cloudcarbon --repository cloudcarboncalculator/api --top 1 --orderby time_desc
+                echo "##vso[task.setvariable variable=imagetag;]$imagetag"
+              
           - task: qetza.replacetokens.replacetokens-task.replacetokens@3 
             displayName: 'Replace tokens in deployment-api.yml' 
             inputs: 
