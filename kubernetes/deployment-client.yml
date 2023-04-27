@@ -21,9 +21,6 @@ spec:
         - name: nginx-config
           mountPath: /docker/nginx.conf
           subPath: nginx.conf
-        - name: other.conf
-          mountPath: /etc/nginx/nginx.conf
-          subPath: nginx.conf
       volumes:
         - name: nginx-config
           configMap:
