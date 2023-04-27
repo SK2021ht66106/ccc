@@ -5,15 +5,35 @@
 
 # RUN yarn install --immutable
 
+# CMD ["yarn", "start"]
+
+
 # FROM nginx:stable-alpine
 # COPY --from=build /app/build /var/www
 # CMD ["nginx", "-g", "daemon off;"]
 
+# FROM node:16-alpine
+# WORKDIR /app
+# #COPY ./package.json ./package.json
+# COPY . ./
+# #COPY serve.json ./
+# RUN yarn install serve --immutable
+# #COPY ./build /app/build
+# CMD serve
+
+
 FROM node:16-alpine
+# set the working direction
 WORKDIR /app
-# COPY ./package.json ./package.json
-# COPY ./build /app/build
-COPY serve.json ./
-RUN yarn install serve --immutable
-COPY ./build /app/build
-CMD serve
+# add `/app/node_modules/.bin` to $PATH
+ENV PATH /app/node_modules/.bin:$PATH
+# install app dependencies
+COPY package.json ./
+COPY yarn.lock ./
+# rebuild node-sass
+RUN yarn add node-sass
+RUN yarn
+# add app
+COPY . ./
+# start app
+CMD ["yarn", "start"]
