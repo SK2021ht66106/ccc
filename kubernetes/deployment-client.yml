@@ -19,12 +19,12 @@ spec:
         - containerPort: 80
         volumeMounts:
         - name: nginx-config
-          mountPath: ../docker/nginx.conf
+          mountPath: /etc/nginx/nginx.conf
           subPath: nginx.conf
       volumes:
         - name: nginx-config
           configMap:
-            name: nginx-config
+            name: confnginx
 --- 
 apiVersion: v1
 kind: Service
