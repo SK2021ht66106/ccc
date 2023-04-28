@@ -16,36 +16,13 @@ stages:
   jobs:
   - deployment: 
     timeoutInMinutes: 360 
-    displayName: Deploy to $(environment)
+    displayName: Deploy API
     environment: '$(environment).$(namespace)' 
     strategy: 
       runOnce: 
         deploy: 
           steps: 
           - checkout: self
-          # - task: AzureCLI@2
-          #   inputs:
-          #     azureSubscription: 'freetrail_sc'
-          #     scriptType: 'core'
-          #     scriptLocation: 'inlineScript'
-          #     inlineScript: |
-          #       $imagetag=az acr repository show-tags --name cloudcarbon --repository cloudcarboncalculator/api --top 1 --orderby time_desc
-          #       Write-Host "##vso[task.setvariable variable=imagetag;]$imagetag"
-          - task: AzureCLI@2
-            inputs:
-              azureSubscription: 'freetrail_sc'
-              scriptType: 'bash'
-              scriptLocation: 'inlineScript'
-              inlineScript: |
-                export IMAGE_TAG=$(az acr repository show-tags --name cloudcarbon --repository cloudcarboncalculator/api --top 1 --orderby time_desc)
-                echo "IMAGE_TAG: $IMAGE_TAG" >> variables.yml
-          # - task: qetza.replacetokens.replacetokens-task.replacetokens@3 
-          #   displayName: 'Replace tokens in deployment-api.yml' 
-          #   inputs: 
-          #     rootDirectory: "$(System.DefaultWorkingDirectory)/kubernetes" 
-          #     targetFiles: deployment-api.yml
-          #echo "##vso[task.setvariable variable=IMAGE_TAG]$IMAGE_TAG"
-          
           - task: replacetokens@5
             inputs:
               rootDirectory: '$(System.DefaultWorkingDirectory)/kubernetes'
@@ -55,18 +32,6 @@ stages:
               writeBOM: true
               actionOnMissing: 'warn'
               keepToken: false
-              # inlineVariables: |
-              #   IMAGE_TAG: "$(IMAGE_TAG)"
-          # - task: replacetokens@3
-          #   inputs:
-          #     targetFiles: '$(System.DefaultWorkingDirectory)/kubernetes'
-          #     encoding: 'auto'
-          #     writeBOM: true
-          #     actionOnMissing: 'warn'
-          #     keepToken: false
-          #     tokenPrefix: '#{'
-          #     tokenSuffix: '}#'
-
 
           - script: cat $(System.DefaultWorkingDirectory)/kubernetes/deployment-api.yml 
             displayName: Print manifest file 
@@ -82,7 +47,7 @@ stages:
   jobs:
   - deployment: 
     timeoutInMinutes: 360 
-    displayName: Deploy to $(environment)
+    displayName: Deploying Client
     environment: '$(environment).$(namespace)' 
     strategy: 
       runOnce: 
@@ -101,3 +66,22 @@ stages:
             inputs: 
               namespace: $(namespace)
               manifests: '$(System.DefaultWorkingDirectory)/kubernetes/deployment-client.yml'
+
+- stage: Deployingress
+  jobs:
+  - deployment: 
+    timeoutInMinutes: 360 
+    displayName: Deploying ingress
+    environment: '$(environment).$(namespace)' 
+    strategy: 
+      runOnce: 
+        deploy: 
+          steps: 
+          - checkout: self
+          - script: cat $(System.DefaultWorkingDirectory)/kubernetes/ingress.yml 
+            displayName: Print manifest file 
+          - task: KubernetesManifest@0 
+            displayName: deploy 
+            inputs: 
+              namespace: $(namespace)
+              manifests: '$(System.DefaultWorkingDirectory)/kubernetes/ingress.yml'
