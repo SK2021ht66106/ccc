@@ -75,5 +75,5 @@ jobs:
 
       - name: Build and push api to Azure Container registry
         run: |
-          docker build ./packages/api -t cloudcarbon.azurecr.io/cloudcarboncalculator/api:${{ github.sha }}
+          docker build ./packages/api -t cloudcarbon.azurecr.io/cloudcarboncalculator/api:latest
           docker push cloudcarbon.azurecr.io/cloudcarboncalculator/api:latest
