@@ -27,7 +27,7 @@ const HeaderBar = (): ReactElement => {
             className={classes.logo}
           />
           <Typography component="h1" variant="h5">
-            Cloud Carbon Footprint
+            Sowmya Kiran
           </Typography>
         </NavLink>
         <NavLink
