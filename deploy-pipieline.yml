@@ -67,11 +67,11 @@ stages:
               namespace: $(namespace)
               manifests: '$(System.DefaultWorkingDirectory)/kubernetes/deployment-client.yml'
 
-- stage: DeployClient
+- stage: Deployingress
   jobs:
   - deployment: 
     timeoutInMinutes: 360 
-    displayName: Deploying Client
+    displayName: Deploying ingress
     environment: '$(environment).$(namespace)' 
     strategy: 
       runOnce: 
