@@ -78,7 +78,7 @@ const defaultTheme = () => {
         { main: '#E2EF70' },
         { main: '#70E4EF' },
       ],
-      primaryBlue: '#3F51B5',
+      primaryBlue: '#056e07',
       lightBlue: 'rgba(63, 81, 181, 0.08)',
       lightTitle: 'rgba(0, 0, 0, 0.87)',
       lightMessage: '#b0bec5',
