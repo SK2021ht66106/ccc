@@ -12,7 +12,7 @@ import { Palette, PaletteOptions } from '@material-ui/core/styles/createPalette'
 
 export type CCFPaletteAdditions = {
   chart: Palette['primary'][]
-  primaryBlue: CSSProperties['color']
+  primary#056e07: CSSProperties['color']
   lightBlue: CSSProperties['color']
   lightTitle: CSSProperties['color']
   lightMessage: CSSProperties['color']
