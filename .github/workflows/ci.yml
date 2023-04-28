@@ -55,6 +55,10 @@ jobs:
         # uses the react-scripts build and tsc build for client
         run: |
           yarn lerna run build
+          cd packages/api
+          chmod +x ./create_server_env_file.sh
+          ./create_server_env_file.sh
+          cd ../..
           cd packages/client
           chmod +x ./create_client_env_file.sh
           ./create_client_env_file.sh
