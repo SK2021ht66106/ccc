@@ -54,7 +54,7 @@ stages:
               writeBOM: true
               actionOnMissing: 'warn'
               keepToken: false
-              inlineVariables: 'IMAGE_TAG: '$(IMAGE_TAG)''
+              inlineVariables: 'IMAGE_TAG: $(IMAGE_TAG)'
           # - task: replacetokens@3
           #   inputs:
           #     targetFiles: '$(System.DefaultWorkingDirectory)/kubernetes'
