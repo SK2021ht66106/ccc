@@ -43,9 +43,7 @@ stages:
             displayName: 'Replace tokens in deployment-api.yml' 
             inputs: 
               rootDirectory: "$(System.DefaultWorkingDirectory)/kubernetes" 
-              targetFiles: deployment-api.yml 
-              variables:
-                IMAGE_TAG: $(IMAGE_TAG)
+              targetFiles: deployment-api.yml
 
           - script: cat $(System.DefaultWorkingDirectory)/kubernetes/deployment-api.yml 
             displayName: Print manifest file 
