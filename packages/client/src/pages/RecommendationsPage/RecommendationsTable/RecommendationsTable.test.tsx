@@ -484,7 +484,7 @@ describe('Recommendations Table', () => {
           recommendations={mockRecommendationsFor2Pages}
         />,
       )
-      const activePageStyle = 'backgroundColor: #3f51b5'
+      const activePageStyle = 'backgroundColor: #056e07'
 
       // Only check buttons in first pagination instance
       expect(getAllByLabelText('page 1')[0]).toHaveStyle(activePageStyle)
@@ -515,7 +515,7 @@ describe('Recommendations Table', () => {
         />,
       )
 
-      const activePageStyle = 'backgroundColor: #3f51b5'
+      const activePageStyle = 'backgroundColor: #056e07'
 
       // Only check buttons in first pagination instance
       expect(getAllByLabelText('page 1')[0]).toHaveStyle(activePageStyle)
