@@ -70,8 +70,8 @@ jobs:
 
       - name: Build and push client to Azure Container registry
         run: |
-          docker build ./packages/client -t cloudcarbon.azurecr.io/cloudcarboncalculator/client:${{ github.sha }}
-          docker push cloudcarbon.azurecr.io/cloudcarboncalculator/client:${{ github.sha }}
+          docker build ./packages/client -t cloudcarbon.azurecr.io/cloudcarboncalculator/client:latest
+          docker push cloudcarbon.azurecr.io/cloudcarboncalculator/client:latest
 
       - name: Build and push api to Azure Container registry
         run: |
