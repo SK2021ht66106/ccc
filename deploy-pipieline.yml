@@ -37,7 +37,7 @@ stages:
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: |
-                export IMAGE_TAG="$(az acr repository show-tags --name cloudcarbon --repository cloudcarboncalculator/api --top 1 --orderby time_desc)"
+                export IMAGE_TAG=$(az acr repository show-tags --name cloudcarbon --repository cloudcarboncalculator/api --top 1 --orderby time_desc)
               
           - task: qetza.replacetokens.replacetokens-task.replacetokens@3 
             displayName: 'Replace tokens in deployment-api.yml' 
