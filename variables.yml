@@ -6,7 +6,6 @@ variables:
     APP_NAME: 'client'
     NUM_POD_REPLICAS: '1'
     AZURE_ACR_NAME: 'cloudcarbon'
-    IMAGE_TAG: 'latest'
     # REACT_APP_TENANT_ID: 79398827-dad5-4378-ac02-4d0f46965838
     # REACT_APP_CLIENT_ID: 30481a8b-2c02-486d-b773-b1ad4f8f4bbe 
     # REACT_APP_CLIENT_SECRET: IEn8Q~f66g3xB1oXaiGM3rgPIMKWG2HPdGLX6cYM 
