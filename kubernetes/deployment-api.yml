@@ -17,6 +17,15 @@ spec:
         image: #{AZURE_ACR_NAME}#.azurecr.io/cloudcarboncalculator/api:a0c8252684cd7ac026b399cd83b04dc4b2077f1c
         ports: 
         - containerPort: 4000
+        env:
+        - name: AZURE_USE_BILLING_DATA
+          value: $AZURE_USE_BILLING_DATA
+        - name: AZURE_CLIENT_ID
+          value: $AZURE_CLIENT_ID
+        - name: AZURE_CLIENT_SECRET
+          value: $AZURE_CLIENT_SECRET
+        - name: AZURE_TENANT_ID
+          value: $AZURE_TENANT_ID
 --- 
 apiVersion: v1 
 kind: Service 
