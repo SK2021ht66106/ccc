@@ -25,21 +25,14 @@ stages:
         deploy: 
           steps: 
           - checkout: self
-          - task: AzurePowerShell@5
+          - task: AzureCLI@2
             inputs:
               azureSubscription: 'freetrail_sc'
-              ScriptType: 'InlineScript'
-              Inline: |
+              scriptType: 'ps'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
                 $imagetag=az acr repository show-tags --name cloudcarbon --repository cloudcarboncalculator/api --top 1 --orderby time_desc
                 Write-Host "##vso[task.setvariable variable=imagetag;]$imagetag"
-          # - task: AzureCLI@2
-          #   inputs:
-          #     azureSubscription: 'freetrail_sc'
-          #     scriptType: 'core'
-          #     scriptLocation: 'inlineScript'
-          #     inlineScript: |
-          #       $imagetag=az acr repository show-tags --name cloudcarbon --repository cloudcarboncalculator/api --top 1 --orderby time_desc
-          #       Write-Host "##vso[task.setvariable variable=imagetag;]$imagetag"
           - task: replacetokens@5
             inputs:
               rootDirectory: '$(System.DefaultWorkingDirectory)/kubernetes'
