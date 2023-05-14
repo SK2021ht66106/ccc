@@ -77,6 +77,7 @@ jobs:
           gsutil cp -r packages/client/stub-server/api gs://${GOOGLE_DEMO_STORAGE_BUCKET}
 
           cd appengine
+          chmod +x ./deploy-production.sh
           ./deploy-production.sh
           cd ..
 
