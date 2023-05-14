@@ -75,6 +75,7 @@ jobs:
           name: dist-workspace
           path: dist-workspace.zip
   deploy-production:
+    needs: build
     runs-on: ubuntu-latest
     container:
       image: node:16.19-alpine3.17
