@@ -28,11 +28,11 @@ stages:
           - task: AzureCLI@2
             inputs:
               azureSubscription: 'freetrail_sc'
-              scriptType: 'ps'
+              scriptType: 'pscore'
               scriptLocation: 'inlineScript'
               inlineScript: |
-                imagetag=$(az acr repository show-tags --name cloudcarbon --repository cloudcarboncalculator/api --top 1 --orderby time_desc)
-                echo "##vso[task.setvariable variable=imagetag;]$imagetag"
+                $imagetag=az acr repository show-tags --name cloudcarbon --repository cloudcarboncalculator/api --top 1 --orderby time_desc
+                Write-Host "##vso[task.setvariable variable=imagetag;]$imagetag"
           - task: replacetokens@5
             inputs:
               rootDirectory: '$(System.DefaultWorkingDirectory)/kubernetes'
