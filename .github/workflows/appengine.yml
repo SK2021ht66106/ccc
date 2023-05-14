@@ -132,8 +132,8 @@ jobs:
           node scripts/create-client-mock-data.js
 
           # Copy static build files to demo Google Cloud Bucket
-          gsutil cp -r packages/client/build/* gs://${GOOGLE_DEMO_STORAGE_BUCKET}
-          gsutil cp -r packages/client/stub-server/api gs://${GOOGLE_DEMO_STORAGE_BUCKET}
+          gsutil cp -r packages/client/build/* gs://cccbucket275
+          gsutil cp -r packages/client/stub-server/api gs://cccbucket275
 
           cd appengine
           chmod +x ./deploy-production.sh
