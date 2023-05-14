@@ -54,7 +54,7 @@ jobs:
       - name: build packages
         # uses the react-scripts build and tsc build for client
         run: |
-          yarn lerna run build
+          yarn lerna run start-with-mock-data
           cd packages/api
           chmod +x ./create_server_env_file.sh
           ./create_server_env_file.sh
