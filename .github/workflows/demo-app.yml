@@ -76,5 +76,9 @@ jobs:
           gsutil cp -r packages/client/build/* gs://${GOOGLE_DEMO_STORAGE_BUCKET}
           gsutil cp -r packages/client/stub-server/api gs://${GOOGLE_DEMO_STORAGE_BUCKET}
 
+          cd appengine
+          ./deploy-production.sh
+          cd ..
+
            # Clean up temporary files
           rm -r packages/client/stub-server/api
