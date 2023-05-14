@@ -31,7 +31,7 @@ stages:
               scriptType: 'pscore'
               scriptLocation: 'inlineScript'
               inlineScript: |
-                $imagetag=az acr repository show-tags --name cloudcarbon --repository cloudcarboncalculator/api --top 1 --orderby time_desc --o tsv
+                $imagetag=az acr repository show-tags --name cloudcarbon --repository cloudcarboncalculator/api --top 1 --orderby time_desc --output tsv
                 Write-Host "##vso[task.setvariable variable=imagetag;]$imagetag"
           - bash: echo $imagetag
           - task: replacetokens@5
